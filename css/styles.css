@@ -11424,3 +11424,57 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for the projects */
+.projects-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: #f5f5f5; /* Example background color */
+}
+
+/* Individual project card */
+.project-card {
+  width: 30%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.project-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.project-card h2 {
+  font-size: 24px;
+  margin-top: 16px;
+}
+
+.project-card p {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.project-card button {
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.project-card button:hover {
+  background: #0056b3;
+}
