@@ -54,6 +54,7 @@
         <div class="container-fluid p-0">
             <!-- About-->
             <section class="resume-section" id="about">
+                <canvas id="vectorField" class="vector-field-canvas"></canvas>
                 <div class="resume-section-content">
                     <h1 class="mb-0">
                         Marco
@@ -508,6 +509,87 @@
                 darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         });
+
+        // Vector Field Animation
+        const canvas = document.getElementById('vectorField');
+        const ctx = canvas.getContext('2d');
+        let mouseX = -1000;
+        let mouseY = -1000;
+
+        function resizeCanvas() {
+            const aboutSection = document.getElementById('about');
+            canvas.width = aboutSection.offsetWidth;
+            canvas.height = aboutSection.offsetHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Track mouse position relative to the about section
+        const aboutSection = document.getElementById('about');
+        aboutSection.addEventListener('mousemove', function(e) {
+            const rect = aboutSection.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+
+        aboutSection.addEventListener('mouseleave', function() {
+            mouseX = -1000;
+            mouseY = -1000;
+        });
+
+        // Vector grid settings
+        const gridSpacing = 40;
+        const vectorLength = 15;
+        const vectorColor = 'rgba(48, 120, 255, 0.3)';
+        const vectorWidth = 1.5;
+
+        function drawArrow(x, y, angle, length) {
+            const headLength = 4;
+            const endX = x + Math.cos(angle) * length;
+            const endY = y + Math.sin(angle) * length;
+
+            // Draw line
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = vectorColor;
+            ctx.lineWidth = vectorWidth;
+            ctx.stroke();
+
+            // Draw arrowhead
+            ctx.beginPath();
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(
+                endX - headLength * Math.cos(angle - Math.PI / 6),
+                endY - headLength * Math.sin(angle - Math.PI / 6)
+            );
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(
+                endX - headLength * Math.cos(angle + Math.PI / 6),
+                endY - headLength * Math.sin(angle + Math.PI / 6)
+            );
+            ctx.stroke();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw vector field
+            for (let x = gridSpacing; x < canvas.width; x += gridSpacing) {
+                for (let y = gridSpacing; y < canvas.height; y += gridSpacing) {
+                    const dx = mouseX - x;
+                    const dy = mouseY - y;
+                    const angle = Math.atan2(dy, dx);
+                    
+                    drawArrow(x, y, angle, vectorLength);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
         </script>
     </body>
 </html>

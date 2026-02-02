@@ -23,6 +23,7 @@
   --bs-orange: #bd5d38;
   --bs-yellow: #ffc107;
   --bs-green: #198754;
+  --bs-greenjelly: #76dca4;
   --bs-teal: #20c997;
   --bs-cyan: #0dcaf0;
   --bs-white: #fff;
@@ -244,7 +245,7 @@ a {
   text-decoration: underline;
 }
 a:hover {
-  color: #974a2d;
+  color: #76dca4;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -3474,7 +3475,7 @@ textarea.form-control-lg {
   text-decoration: underline;
 }
 .btn-link:hover {
-  color: #974a2d;
+  color: #76dca4;
 }
 .btn-link:disabled, .btn-link.disabled {
   color: #6c757d;
@@ -11391,7 +11392,7 @@ p.lead {
   margin-right: 0;
 }
 .social-icons .social-icon:hover {
-  background-color: #bd5d38;
+  background-color: #76dca4; 
 }
 
 .dev-icons {
@@ -11798,5 +11799,31 @@ body,
 .article-card,
 hr {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* Vector Field Canvas */
+.vector-field-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#about {
+    position: relative;
+}
+
+#about .resume-section-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Dark mode for vector field */
+[data-theme="dark"] .vector-field-canvas {
+    opacity: 0.5;
 }
 
