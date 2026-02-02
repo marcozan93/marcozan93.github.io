@@ -11478,3 +11478,325 @@ section.resume-section .resume-section-content {
 .project-card button:hover {
   background: #0056b3;
 }
+
+/* Medium Articles Section */
+.articles-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 2rem;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.articles-scroll-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.articles-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.articles-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--bs-primary);
+    border-radius: 5px;
+}
+
+.articles-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #2563d8;
+}
+
+.article-card {
+    flex: 0 0 350px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.article-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.article-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.article-content {
+    padding: 1.5rem;
+}
+
+.article-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-subtitle {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-date {
+    font-size: 0.85rem;
+    color: #adb5bd;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .article-card {
+        flex: 0 0 280px;
+    }
+    
+    .article-card h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Fix alignment for dates and locations in all resume sections */
+.resume-section .flex-shrink-0 {
+    text-align: right;
+    align-self: flex-start !important;
+}
+
+/* Ensure consistent spacing */
+.resume-section .flex-shrink-0 div {
+    white-space: nowrap;
+}
+
+/* Scroll Progress Bar */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bs-primary), #00d4ff);
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 2px 4px rgba(48, 120, 255, 0.4);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--bs-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(48, 120, 255, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    background: #2563d8;
+    transform: translateY(0) scale(1.1);
+    box-shadow: 0 6px 20px rgba(48, 120, 255, 0.5);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1rem;
+    }
+    
+    .scroll-progress-bar {
+        height: 3px;
+    }
+}
+
+/* Dark Mode Variables */
+:root {
+    --bg-color: #fff;
+    --text-color: #212529;
+    --secondary-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --card-bg: #fff;
+    --subheading-color: #6c757d;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e4e4e4;
+    --secondary-bg: #2d2d2d;
+    --border-color: #404040;
+    --card-bg: #2d2d2d;
+    --subheading-color: #a0a0a0;
+}
+
+/* Apply dark mode colors */
+[data-theme="dark"] body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .resume-section {
+    background-color: var(--bg-color);
+}
+
+[data-theme="dark"] .navbar-dark {
+    background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] .text-primary {
+    color: #5b9aff !important;
+}
+
+[data-theme="dark"] .subheading {
+    color: var(--subheading-color);
+}
+
+[data-theme="dark"] .lead {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] hr {
+    background-color: var(--border-color);
+    opacity: 0.3;
+}
+
+/* Dark mode for project cards */
+[data-theme="dark"] .project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .project-card h2 {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .project-card p {
+    color: var(--subheading-color);
+}
+
+[data-theme="dark"] .project-card button {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+[data-theme="dark"] .project-card button:hover {
+    background-color: #2563d8;
+}
+
+/* Dark mode for article cards */
+[data-theme="dark"] .article-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .article-card h3 {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .article-subtitle {
+    color: var(--subheading-color);
+}
+
+/* Dark Mode Toggle Button */
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--bs-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(48, 120, 255, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    background: #2563d8;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(48, 120, 255, 0.5);
+}
+
+.dark-mode-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dark-mode-toggle {
+        width: 45px;
+        height: 45px;
+        top: 15px;
+        right: 15px;
+        font-size: 1rem;
+    }
+}
+
+
+/* Dark mode transition */
+body,
+.resume-section,
+.navbar-dark,
+.project-card,
+.article-card,
+hr {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+

@@ -16,6 +16,20 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
+
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress-bar"></div>
+
+        <!-- Back to Top Button -->
+        <button id="backToTop" class="back-to-top" title="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Dark Mode Toggle -->
+        <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
+
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -32,6 +46,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#research">Scientific Research</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#activities">Activities and Further Education</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#articles">Medium Articles</a></li>
                 </ul>
             </div>
         </nav>
@@ -45,7 +60,7 @@
                         <span class="text-primary">Zanin</span>
                     </h1>
                     <div class="subheading mb-5">
-                        43 Upper North Street · London (UK) · +447568693433 ·
+                        London (UK) · +44 7568693433 ·
                         <a href="mailto:marcozaninitaly@gmail.com">marcozaninitaly@gmail.com</a>
                     </div>
                     <h2 class="mb-5">About Me</h2>
@@ -116,7 +131,7 @@
                             <h3 class="mb-0">University of Bath</h3>
                             <div class="subheading mb-3">MSc Computer Science</div>
                             <div>   </div>
-                            <li>Expected Grade: -</li>
+                            <!-- <li>Expected Grade: - </li> -->
                         </div>
                         <div class="flex-shrink-0"><div class="text-primary">Bath (UK)</div>
                             <div class="text-primary">April 2024 - Present</div></div>
@@ -125,7 +140,7 @@
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Leeds Beckett University</h3>
                             <div class="subheading mb-3">PhD Sport Analytics</div>
-                            <li>Thesis: "Improving training efficiency in professional rugby union".</li>
+                            <!-- <li>Thesis: "Improving training efficiency in professional rugby union".</li> -->
                         </div>
                         <div class="flex-shrink-0"><div class="text-primary">Leeds (UK)</div>
                             <div class="text-primary">September 2019 - April 2023</div></div>
@@ -134,7 +149,7 @@
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Leeds Beckett University</h3>
                             <div class="subheading mb-3">MSc Strength and Conditioning</div>
-                            <li>Grade: Merit</li>                        
+                            <!-- <li>Grade: Merit</li>                        -->
                         </div>
                         <div class="flex-shrink-0"><div class="text-primary">Leeds (UK)</div>
                             <div class="text-primary">September 2015 - October 2016</div></div>
@@ -143,7 +158,7 @@
                         <div class="flex-grow-1">
                             <h3 class="mb-0">University of Padova</h3>
                             <div class="subheading mb-3">BSc Human Movement Sciences</div>
-                            <li>Grade: 110/110</li>                        
+                            <!-- <li>Grade: 110/110</li>                        -->
                         </div>
                         <div class="flex-shrink-0"><div class="text-primary">Padova (IT)</div>
                             <div class="text-primary">September 2012 - June 2015</div></div>
@@ -316,10 +331,173 @@
                         </div>
                 </div>
             </section>
+            <hr class="m-0" />
+            <!-- Medium Articles -->
+            <section class="resume-section" id="articles">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Medium Articles</h2>
+                    
+                    <div class="articles-scroll-container">
+
+                        <!-- Article 0 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/low-code-for-advanced-data-science/did-you-check-the-accuracy-and-consistency-of-your-data-8cace12d9793" target="_blank">
+                                <img src="assets/img/outliers.png" alt="Outliers article">
+                                <div class="article-content">
+                                    <h3>Did you check the accuracy and consistency of your data?</h3>
+                                    <p class="article-subtitle">Outliers can substantially impact the findings of your analysis.</p>
+                                    <p class="article-date">Dec 3, 2025</p>
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <!-- Article 1 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/breathing-history-the-probability-of-inhaling-julius-caesars-last-words-0049973ff5c5" target="_blank">
+                                <img src="assets/img/roman_empire.png" alt="Julius Caesar probability article">
+                                <div class="article-content">
+                                    <h3>Breathing History: The Probability of Inhaling Julius Caesar's Last Words</h3>
+                                    <p class="article-subtitle">How often do you think about the Roman Empire and probability?</p>
+                                    <p class="article-date">Mar 4, 2025</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 2 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/connect4-game-using-java-4b5cc0a9f0b2" target="_blank">
+                                <img src="assets/img/connect4.png" alt="Connect4 Java game">
+                                <div class="article-content">
+                                    <h3>Connect4 game using Java</h3>
+                                    <p class="article-subtitle">Develop a Desktop application using Java to recreate the Connect4 game with one human player playing against a "smart" robot.</p>
+                                    <p class="article-date">Jun 24, 2024</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 3 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/singular-value-decomposition-with-maths-and-python-4b98582fc385" target="_blank">
+                                <img src="assets/img/svd.png" alt="SVD article">
+                                <div class="article-content">
+                                    <h3>Singular value decomposition with maths and python</h3>
+                                    <p class="article-subtitle">Introduction to SVD in linear algebra with practical applications and examples.</p>
+                                    <p class="article-date">Mar 27, 2024</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 4 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/least-square-in-linear-models-with-algebra-and-python-279e3d82e20c" target="_blank">
+                                <img src="assets/img/least_square.png" alt="Least squares article">
+                                <div class="article-content">
+                                    <h3>Least square in linear models with algebra and python</h3>
+                                    <p class="article-subtitle">An introduction to linear models using least square with maths and python.</p>
+                                    <p class="article-date">Feb 7, 2024</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 5 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/introducing-probability-from-a-computer-science-perspective-00ce4fc10358" target="_blank">
+                                <img src="assets/img/probs.png" alt="Probability article">
+                                <div class="article-content">
+                                    <h3>Introducing probability from a computer science perspective</h3>
+                                    <p class="article-subtitle">Discrete mathematics: sets, counting, and discrete probability.</p>
+                                    <p class="article-date">Jan 29, 2024</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 6 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/end-to-end-machine-learning-using-fastapi-streamlit-docker-google-cloud-platform-fcdf9f9216e0" target="_blank">
+                                <img src="assets/img/wine.png" alt="ML FastAPI article">
+                                <div class="article-content">
+                                    <h3>End-to-end machine learning using FastAPI, Streamlit, Docker, Google Cloud Platform</h3>
+                                    <p class="article-subtitle">Limited articles are available demonstrating a complete end-to-end machine learning project.</p>
+                                    <p class="article-date">Aug 29, 2023</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Article 7 -->
+                        <div class="article-card">
+                            <a href="https://medium.com/@marcozaninitaly/birthday-paradox-with-maths-and-python-2b8bb0767704" target="_blank">
+                                <img src="assets/img/birthday_para.png" alt="Birthday paradox article">
+                                <div class="article-content">
+                                    <h3>Birthday paradox with maths and python</h3>
+                                    <p class="article-subtitle">This is a brief discussion of the birthday paradox in discrete probability using maths and python.</p>
+                                    <p class="article-date">Feb 19, 2025</p>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+                <!-- Scroll Indicators Script -->
+        <script>
+            // Scroll Progress Bar
+            window.addEventListener('scroll', function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+            });
+
+            // Back to Top Button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        </script>
+
+        // Dark Mode Toggle
+        <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            htmlElement.setAttribute('data-theme', 'dark');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        darkModeToggle.addEventListener('click', function() {
+            let theme = htmlElement.getAttribute('data-theme');
+            
+            if (theme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+        </script>
     </body>
 </html>
