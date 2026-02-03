@@ -183,13 +183,12 @@
                     <h2 class="mb-5">Skills</h2>
                     <div class="subheading mb-3">Programming Languages & Tools</div>
                     <li>Java</li>
-                    <li>Python: Pandas, sklearn, nltk, Darts, plotly, statsmodels, selenium, Scikit-Learn.</li>
-                    <li>R: base, stats, lme4, lattice, ggplot2, shiny, tidyverse.</li>
-                    <li>SQL: MySQL, RMariaDB connection, BigQuery.</li>
-                    <li>Visualisation: PowerBi, Looker Studio, Streamlit.</li>
+                    <li>Python: pandas, sklearn, nltk, matplotlib, plotly, statsmodels, selenium, tensorflow, keras.</li>
+                    <li>R: base, stats, lme4, lattice, ggplot2, tidyverse.</li>
+                    <li>SQL: MySQL, BigQuery, RMariaDB connection, SQLite.</li>
+                    <li>Visualisation: Shiny, PowerBi, Looker Studio, Streamlit.</li>
                     <li>Versioning: Git, GitHub.</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
+                    <li>HTML and CSS</li>
                     <li>Docker</li>
                     <li>GCP: BigQuery, Cloud Run, Cloud Build.</li>
                     <li>Atlassian: Jira, Confluence.</li>
@@ -308,40 +307,48 @@
                 <div class="resume-section-content">
                 <h2 class="mb-5">Projects</h2>
                 
-                <div class="projects-container">
+                <div class="projects-scroll-container">
 
                     <!-- Project 1 -->
                     <div class="project-card">
-                    <img src="assets/img/monitoring.png" alt="Monitoring Dashboard">
-                    <h2>PERFORMANCE DASHBOARD FOR SOCCER</h2>
-                    <p>Training load/fatigue monitoring and analytics dashboard for professional soccer team.</p>
-                    <p>Developed using R, Python and Shiny.</p>
-                        <a href="https://marcozaninitaly.shinyapps.io/training_load_app/">
-                            <button>Project</button>
-                        </a>
+                        <img src="assets/img/monitoring.png" alt="Monitoring Dashboard">
+                        <div class="project-content">
+                            <h3>PERFORMANCE DASHBOARD FOR SOCCER</h3>
+                            <p>Training load/fatigue monitoring and analytics dashboard for professional soccer team.</p>
+                            <p class="project-tech">Developed using R, Python and Shiny.</p>
+                            <a href="https://marcozaninitaly.shinyapps.io/training_load_app/" target="_blank">
+                                <button class="project-button">View Project</button>
+                            </a>
+                        </div>
                     </div>
                     <!-- Project 2 -->
                     <div class="project-card">
                         <img src="assets/img/kevin.png" alt="Wine Quality">
-                        <h2>PREDICTING WINE QUALITY</h2>
-                        <p>Predicting the quality of a wine using random forest with sklearn.</p>
-                        <p>Hosted on Google Cloud.</p>
-                        <a href="https://myimage-lc3ojkzooa-ew.a.run.app/">
-                            <button>Project</button>
-                        </a>
+                        <div class="project-content">
+                            <h3>PREDICTING WINE QUALITY</h3>
+                            <p>Predicting the quality of a wine using random forest with sklearn.</p>
+                            <p class="project-tech">Python, FastAPI, Streamlit, Google Cloud Platform.</p>
+                            <a href="https://myimage-lc3ojkzooa-ew.a.run.app/" target="_blank">
+                                <button class="project-button">View Project</button>
+                            </a>
+                        </div>
                     </div>
                     <!-- Project 3 -->
                     <div class="project-card">
                         <img src="assets/img/connect4.png" alt="Connect4 Game">
-                        <h2>CONNECT4 GAME</h2>
-                        <p>The popular Connect4 game implemented in Java using object-oriented programming.</p>
-                        <p>Developed using Java.</p>
-                            <a href="https://github.com/marcozan93/ConnectFour">
-                                <button>Project</button>
+                        <div class="project-content">
+                            <h3>CONNECT4 GAME</h3>
+                            <p>The popular Connect4 game implemented in Java using object-oriented programming.</p>
+                            <p class="project-tech">Developed using Java.</p>
+                            <a href="https://github.com/marcozan93/ConnectFour" target="_blank">
+                                <button class="project-button">View Project</button>
                             </a>
                         </div>
+                    </div>
                 </div>
+
             </section>
+
             <hr class="m-0" />
             <!-- Medium Articles -->
             <section class="resume-section" id="articles">
@@ -484,8 +491,9 @@
             });
         </script>
 
-        // Dark Mode Toggle
+        
         <script>
+        // Dark Mode Toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
         const htmlElement = document.documentElement;
 

@@ -11827,3 +11827,207 @@ hr {
     opacity: 0.5;
 }
 
+
+/* Projects Scroll Container - matching Medium articles style */
+.projects-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 2rem;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.projects-scroll-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.projects-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.projects-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--bs-primary);
+    border-radius: 5px;
+}
+
+.projects-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #2563d8;
+}
+
+/* Updated Project Card Styles */
+.projects-scroll-container .project-card {
+    flex: 0 0 350px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.projects-scroll-container .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.projects-scroll-container .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.projects-scroll-container .project-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.projects-scroll-container .project-card p {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.project-tech {
+    font-size: 0.85rem;
+    color: var(--bs-primary);
+    font-weight: 600;
+    margin-bottom: 1rem !important;
+}
+
+.project-button {
+    background: var(--bs-primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    width: 100%;
+}
+
+.project-button:hover {
+    background: #2563d8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(48, 120, 255, 0.3);
+}
+
+/* Dark mode for projects */
+[data-theme="dark"] .projects-scroll-container .project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .projects-scroll-container .project-card h3 {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .projects-scroll-container .project-card p {
+    color: var(--subheading-color);
+}
+
+[data-theme="dark"] .project-tech {
+    color: #5b9aff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .projects-scroll-container .project-card {
+        flex: 0 0 280px;
+    }
+    
+    .projects-scroll-container .project-card h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile fixes for dark mode toggle and education layout */
+
+/* Fix dark mode toggle visibility on mobile - move it below navbar */
+@media (max-width: 992px) {
+    .dark-mode-toggle {
+        top: 87px;
+        right: 15px;
+        z-index: 1050;
+    }
+}
+
+/* Keep dates on the right side in mobile view for education/experience sections */
+@media (max-width: 767px) {
+    .resume-section .d-flex.flex-column.flex-md-row {
+        flex-direction: row !important;
+    }
+    
+    .resume-section .flex-shrink-0 {
+        text-align: right;
+        min-width: 120px;
+        margin-left: 1rem;
+    }
+    
+    .resume-section .flex-shrink-0 div {
+        font-size: 0.85rem;
+    }
+}
+
+/* Adjust for very small screens */
+@media (max-width: 480px) {
+    .resume-section .flex-shrink-0 {
+        min-width: 100px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Move bullet points to the right on mobile view */
+@media (max-width: 767px) {
+    .resume-section li {
+        margin-left: 1.5rem;
+    }
+    
+    /* For nested list items (like in Activities section) */
+    .resume-section li li {
+        margin-left: 2rem;
+    }
+}
+
+/* Show profile picture on mobile in navbar */
+@media (max-width: 991px) {
+    .navbar-brand .d-none.d-lg-block {
+        display: inline-block !important;
+        text-align: center;
+    }
+    
+    .navbar-brand .img-profile {
+        width: 45px;
+        height: 50px;
+        margin: 0;
+    }
+    
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    /* Show both name and picture on mobile */
+    .navbar-brand .d-block.d-lg-none {
+        display: inline-block !important;
+    }
+}
