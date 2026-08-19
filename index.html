@@ -549,8 +549,15 @@
         // Vector grid settings
         const gridSpacing = 40;
         const vectorLength = 15;
-        const vectorColor = 'rgba(48, 120, 255, 0.3)';
         const vectorWidth = 1.5;
+
+        // Keep the original subtle blue in light mode, but increase
+        // contrast against the dark background.
+        function getVectorColor() {
+            return htmlElement.getAttribute('data-theme') === 'dark'
+                ? 'rgba(91, 154, 255, 0.60)'
+                : 'rgba(48, 120, 255, 0.30)';
+        }
 
         function drawArrow(x, y, angle, length) {
             const headLength = 4;
@@ -561,7 +568,7 @@
             ctx.beginPath();
             ctx.moveTo(x, y);
             ctx.lineTo(endX, endY);
-            ctx.strokeStyle = vectorColor;
+            ctx.strokeStyle = getVectorColor();
             ctx.lineWidth = vectorWidth;
             ctx.stroke();
 
