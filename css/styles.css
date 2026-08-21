@@ -298,17 +298,106 @@ h3 { font-family: var(--font-display); }
 .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
 .back-to-top:hover { color: var(--primary); }
 
-/* custom mathematical cursor */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  body.custom-cursor-enabled, body.custom-cursor-enabled a, body.custom-cursor-enabled button { cursor: none; }
-  .math-cursor, .math-cursor-dot { display: block; }
+/* shooting-star cursor */
+.cursor-trail-canvas,
+.physics-cursor {
+  display: none;
+  position: fixed;
+  inset: 0 auto auto 0;
+  pointer-events: none;
 }
-.math-cursor, .math-cursor-dot { display: none; position: fixed; pointer-events: none; z-index: 10050; top: 0; left: 0; }
-.math-cursor { width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1px solid rgba(var(--primary-rgb), .7); border-radius: 50%; background: rgba(var(--primary-rgb), .055); backdrop-filter: blur(2px); color: var(--primary); transition: width .16s ease, height .16s ease, margin .16s ease, background .16s ease, border-color .16s ease; }
-.math-cursor span { position: absolute; inset: 0; display: grid; place-items: center; font: 600 .75rem/1 var(--font-mono); }
-.math-cursor-dot { width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 9px rgba(var(--primary-rgb), .6); }
-.math-cursor.is-hovering { width: 48px; height: 48px; margin: -24px 0 0 -24px; background: rgba(var(--primary-rgb), .13); border-color: rgba(var(--primary-rgb), .95); }
-.math-cursor.is-hovering span { transform: scale(1.08); }
+
+.cursor-trail-canvas {
+  width: 100vw;
+  height: 100vh;
+  z-index: 10045;
+}
+
+.physics-cursor {
+  --cursor-angle: 0deg;
+  --tail-scale: 1;
+  --cursor-size: 28px;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  margin: calc(var(--cursor-size) / -2) 0 0 calc(var(--cursor-size) / -2);
+  z-index: 10060;
+  will-change: transform;
+  opacity: 1;
+  transition: opacity .14s ease, transform .08s linear;
+}
+
+.physics-cursor-glow,
+.physics-cursor-core,
+.physics-cursor-flare {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  border-radius: 999px;
+}
+
+.physics-cursor-glow {
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,.58) 18%, rgba(var(--primary-rgb), .44) 42%, rgba(var(--primary-rgb), .14) 66%, rgba(var(--primary-rgb), 0) 100%);
+  filter: blur(1.6px);
+  box-shadow: 0 0 18px rgba(var(--primary-rgb), .48), 0 0 32px rgba(var(--primary-rgb), .20);
+}
+
+.physics-cursor-core {
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  box-shadow: 0 0 0 1.2px rgba(255,255,255,.92), 0 0 10px 3px rgba(var(--primary-rgb), .90), 0 0 24px 7px rgba(var(--primary-rgb), .36);
+}
+
+.physics-cursor-flare {
+  width: 54px;
+  height: 12px;
+  left: calc(50% - 2px);
+  transform: translate(-100%, -50%) rotate(var(--cursor-angle)) scaleX(var(--tail-scale));
+  transform-origin: 100% 50%;
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0) 0%, rgba(var(--primary-rgb), .08) 24%, rgba(var(--primary-rgb), .22) 58%, rgba(255,255,255,.96) 100%);
+  filter: blur(4px);
+  opacity: .96;
+  mix-blend-mode: screen;
+}
+
+.physics-cursor.is-hovering .physics-cursor-glow {
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 24px rgba(var(--primary-rgb), .56), 0 0 42px rgba(var(--primary-rgb), .24);
+}
+
+.physics-cursor.is-hovering .physics-cursor-core {
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,.96), 0 0 14px 4px rgba(var(--primary-rgb), 1), 0 0 30px 10px rgba(var(--primary-rgb), .42);
+}
+
+.physics-cursor.is-hovering .physics-cursor-flare {
+  width: 66px;
+  opacity: 1;
+}
+
+.physics-cursor.is-pressed .physics-cursor-glow {
+  width: 20px;
+  height: 20px;
+}
+
+.physics-cursor.is-pressed .physics-cursor-core {
+  width: 7px;
+  height: 7px;
+}
+
+.physics-cursor.is-hidden { opacity: 0; }
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body.physics-cursor-enabled,
+  body.physics-cursor-enabled * { cursor: none !important; }
+  body.physics-cursor-enabled .cursor-trail-canvas,
+  body.physics-cursor-enabled .physics-cursor { display: block; }
+}
 
 /* animations */
 @keyframes spin { to { transform: rotate(360deg); } }

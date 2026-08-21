@@ -98,39 +98,199 @@
     });
   });
 
-  // ----- Custom lambda cursor ---------------------------------------------
-  const cursor = document.getElementById('mathCursor');
-  const cursorDot = document.getElementById('mathCursorDot');
+  // ----- Shooting-star cursor ------------------------------------------------
+  const physicsCursor = document.getElementById('physicsCursor');
+  const cursorTrail = document.getElementById('cursorTrail');
   const finePointer = window.matchMedia('(pointer: fine)');
 
-  if (finePointer.matches && !prefersReducedMotion.matches && cursor && cursorDot) {
-    body.classList.add('custom-cursor-enabled');
-    let mouseX = -100;
-    let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
+  if (
+    finePointer.matches &&
+    !prefersReducedMotion.matches &&
+    physicsCursor && cursorTrail
+  ) {
+    const trailCtx = cursorTrail.getContext('2d');
+    if (trailCtx) {
+      const state = {
+        mouseX: window.innerWidth / 2,
+        mouseY: window.innerHeight / 2,
+        previousMouseX: window.innerWidth / 2,
+        previousMouseY: window.innerHeight / 2,
+        vx: 0,
+        vy: 0,
+        visible: false,
+      };
 
-    document.addEventListener('pointermove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    }, { passive: true });
+      const trailPoints = [];
+      const sparks = [];
+      const MAX_POINTS = 26;
+      const MAX_SPARKS = 36;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    const hoverSelector = 'a, button, .spotlight-card';
-    document.addEventListener('pointerover', e => {
-      if (e.target.closest(hoverSelector)) cursor.classList.add('is-hovering');
-    });
-    document.addEventListener('pointerout', e => {
-      if (e.target.closest(hoverSelector)) cursor.classList.remove('is-hovering');
-    });
+      function resizeTrailCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cursorTrail.width = Math.round(window.innerWidth * dpr);
+        cursorTrail.height = Math.round(window.innerHeight * dpr);
+        cursorTrail.style.width = `${window.innerWidth}px`;
+        cursorTrail.style.height = `${window.innerHeight}px`;
+        trailCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resizeTrailCanvas();
+      window.addEventListener('resize', resizeTrailCanvas, { passive: true });
 
-    function animateCursor() {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      cursor.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-      requestAnimationFrame(animateCursor);
+      function primaryRGB() {
+        const raw = getComputedStyle(document.documentElement)
+          .getPropertyValue('--primary-rgb')
+          .trim();
+        return raw || '48,120,255';
+      }
+
+      function addTrailPoint(x, y, speed) {
+        trailPoints.push({
+          x,
+          y,
+          speed,
+          life: 1,
+          decay: 0.050 + Math.random() * 0.014,
+        });
+        if (trailPoints.length > MAX_POINTS) trailPoints.shift();
+      }
+
+      function emitSparks(x, y, vx, vy) {
+        const speed = Math.hypot(vx, vy);
+        if (speed < 3) return;
+
+        const angle = Math.atan2(vy, vx) + Math.PI;
+        const count = Math.min(3, 1 + Math.floor(speed / 14));
+        for (let i = 0; i < count; i += 1) {
+          const spread = (Math.random() - 0.5) * 0.65;
+          const magnitude = 0.9 + Math.random() * Math.min(speed * 0.08, 2.6);
+          sparks.push({
+            x,
+            y,
+            vx: Math.cos(angle + spread) * magnitude,
+            vy: Math.sin(angle + spread) * magnitude,
+            life: 1,
+            decay: 0.035 + Math.random() * 0.025,
+            radius: 1.2 + Math.random() * 1.8,
+          });
+        }
+        if (sparks.length > MAX_SPARKS) sparks.splice(0, sparks.length - MAX_SPARKS);
+      }
+
+      document.addEventListener('pointermove', e => {
+        const dx = e.clientX - state.previousMouseX;
+        const dy = e.clientY - state.previousMouseY;
+        state.previousMouseX = e.clientX;
+        state.previousMouseY = e.clientY;
+        state.mouseX = e.clientX;
+        state.mouseY = e.clientY;
+        state.vx = dx;
+        state.vy = dy;
+
+        const speed = Math.hypot(dx, dy);
+        addTrailPoint(e.clientX, e.clientY, speed);
+        emitSparks(e.clientX, e.clientY, dx, dy);
+
+        if (!state.visible) {
+          state.visible = true;
+          physicsCursor.classList.remove('is-hidden');
+          body.classList.add('physics-cursor-enabled');
+        }
+      }, { passive: true });
+
+      document.documentElement.addEventListener('mouseleave', () => {
+        state.visible = false;
+        physicsCursor.classList.add('is-hidden');
+      });
+
+      document.documentElement.addEventListener('mouseenter', () => {
+        if (state.visible) physicsCursor.classList.remove('is-hidden');
+      });
+
+      const hoverSelector = 'a, button, .spotlight-card, .project-card, .article-card';
+      document.addEventListener('pointerover', e => {
+        if (e.target.closest(hoverSelector)) physicsCursor.classList.add('is-hovering');
+      });
+      document.addEventListener('pointerout', e => {
+        if (e.target.closest(hoverSelector)) physicsCursor.classList.remove('is-hovering');
+      });
+      document.addEventListener('pointerdown', () => {
+        physicsCursor.classList.add('is-pressed');
+      });
+      document.addEventListener('pointerup', () => {
+        physicsCursor.classList.remove('is-pressed');
+      });
+
+      function drawTrail() {
+        trailCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        const rgb = primaryRGB();
+
+        for (let i = trailPoints.length - 1; i >= 0; i -= 1) {
+          const p = trailPoints[i];
+          p.life -= p.decay;
+          if (p.life <= 0) {
+            trailPoints.splice(i, 1);
+          }
+        }
+
+        if (trailPoints.length > 1) {
+          trailCtx.lineCap = 'round';
+          trailCtx.lineJoin = 'round';
+          for (let i = 1; i < trailPoints.length; i += 1) {
+            const prev = trailPoints[i - 1];
+            const curr = trailPoints[i];
+            const life = curr.life;
+            const width = Math.max(1.2, 1.4 + life * 5 + Math.min(curr.speed * 0.02, 2.4));
+            trailCtx.beginPath();
+            trailCtx.moveTo(prev.x, prev.y);
+            trailCtx.lineTo(curr.x, curr.y);
+            trailCtx.strokeStyle = `rgba(${rgb}, ${0.05 + life * 0.42})`;
+            trailCtx.shadowBlur = 16;
+            trailCtx.shadowColor = `rgba(${rgb}, ${life * 0.30})`;
+            trailCtx.lineWidth = width;
+            trailCtx.stroke();
+          }
+        }
+
+        for (let i = sparks.length - 1; i >= 0; i -= 1) {
+          const s = sparks[i];
+          s.x += s.vx;
+          s.y += s.vy;
+          s.vx *= 0.93;
+          s.vy *= 0.93;
+          s.life -= s.decay;
+          s.radius *= 0.986;
+
+          if (s.life <= 0 || s.radius < 0.35) {
+            sparks.splice(i, 1);
+            continue;
+          }
+
+          trailCtx.beginPath();
+          trailCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+          trailCtx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, s.life) * 0.85})`;
+          trailCtx.shadowBlur = 10;
+          trailCtx.shadowColor = `rgba(${rgb}, ${Math.max(0, s.life) * 0.55})`;
+          trailCtx.fill();
+        }
+        trailCtx.shadowBlur = 0;
+      }
+
+      function animateShootingStarCursor() {
+        const speed = Math.hypot(state.vx, state.vy);
+        const angle = speed > 0.08 ? Math.atan2(state.vy, state.vx) * 180 / Math.PI : 0;
+        const tailScale = 1 + Math.min(speed / 18, 1.45);
+        physicsCursor.style.setProperty('--cursor-angle', `${angle}deg`);
+        physicsCursor.style.setProperty('--tail-scale', tailScale.toFixed(3));
+        physicsCursor.style.transform = `translate3d(${state.mouseX}px, ${state.mouseY}px, 0)`;
+
+        drawTrail();
+        requestAnimationFrame(animateShootingStarCursor);
+      }
+
+      physicsCursor.classList.add('is-hidden');
+      animateShootingStarCursor();
     }
-    animateCursor();
   }
 
   // ----- Small magnetic movement on primary controls ----------------------
